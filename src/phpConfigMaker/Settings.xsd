@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="Settings">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:element name="Text">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="defaultGroup" />
+                    </xs:complexType>
+                </xs:element>
+                 <xs:element name="Number">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="defaultGroup" />
+                    </xs:complexType>
+                 </xs:element>
+             <xs:element name="Integer">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="defaultGroup" />
+                    </xs:complexType>
+                </xs:element></xs:choice>
+                <xs:element name="ListChoice">
+                    <xs:complexType>
+                        <xs:group ref="ListGroup" />
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="MultiListSperated">
+                    <xs:complexType>
+                        <xs:group ref="ListGroup" />
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="minMaxGroup" />
+                        <xs:attribute name="seperator">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string"/>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Boolean">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="ListGroup">
+        <xs:sequence>
+            <xs:element name="Item"  maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="value" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:attributeGroup name="dependsGroup">
+        <xs:attribute name="depends" use="optional" type="xs:string" />
+        <xs:attribute name="depends-equals" use="optional" type="xs:string" />
+    </xs:attributeGroup>
+    <xs:attributeGroup name="minMaxGroup">
+        <xs:attribute name="min" use="optional" type="xs:int" />
+        <xs:attribute name="max" use="optional" type="xs:int" />
+    </xs:attributeGroup>
+    <xs:attributeGroup name="mustHaveGroup"> 
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="prompt" type="xs:string" />
+        <xs:attribute name="exclude">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="from-config"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="defaultGroup">
+        <xs:attribute name="default" use="optional" type="xs:string" />
+    </xs:attributeGroup>
+    <xs:attributeGroup name="seperatorGroup">
+        <xs:attribute name="seperator" type="xs:string" />    
+    </xs:attributeGroup>
+</xs:schema>

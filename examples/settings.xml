@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='file:/home/mario/NetBeansProjects/php-config-maker/src/Settings.xsd'>
+    <ListChoice key="sqltype" prompt="Select the type of database you want to use: " exclude="from-config">
+        <Item value="mysql"/>
+        <Item value="sqlite"/>
+    </ListChoice>
+    <Text key="mysql_server" prompt="Mysql server [localhost]: " default="localhost" depends="sqltype" depends-equals="mysql" />
+    <Text key="mysql_username" prompt="Mysql username: " depends="sqltype" depends-equals="mysql" />
+    <Text key="mysql_password" prompt="Mysql password: " depends="sqltype" depends-equals="mysql" />
+    <Text key="mysql_databasename" prompt="Database name: " depends="sqltype" depends-equals="mysql" />
+    <Text key="sqlite_file" prompt="Sqlite file: " depends="sqltype" depends-equals="sqlite" />
+</Settings>
