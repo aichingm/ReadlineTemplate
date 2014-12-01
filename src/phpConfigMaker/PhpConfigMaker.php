@@ -46,10 +46,12 @@ class PhpConfigMaker {
         $dom->load($this->xmlFile);
         $answers = array();
         $configuration = array();
+        $requestedReader = array();
         $settings = $dom->getElementsByTagName("Settings")->item(0);
         foreach ($settings->childNodes as $setting) {
             if ($setting instanceof \DOMElement) {
-                if ($this->checkDepends($setting, $answers)) {
+                if ($this->checkDepends($requestedReader, $setting, $answers)) {
+                    $requestedReader[$setting->getAttribute("key")] = $setting->tagName;
                     $reader = $this->getReader($setting->tagName);
                     $reader->setUp($setting);
                     $answer = $reader->ask($setting->getAttribute("prompt"));
@@ -69,11 +71,11 @@ class PhpConfigMaker {
 
     /**
      * Returns the reader which is used to ask the user so enter data for this type of setting
-     * @param type $type the type of setting for which a {@see SettingReader} is searched
+     * @param string $type the type of setting for which a {@see SettingReader} is searched
      * @return \SettingReader Returns a {@see SettingReader} or if none is fund throws a  {@see NoReaderFound} exception
      * @throws NoReaderFound Throws a {@see NoReaderFound} exception if no {@see SettingReader} for the $type of element is added via {@see PhpConfigMaker::addReader()}
      */
-    private function getReader($type) {
+    private function &getReader($type) {
         if (isset($this->reader[$type])) {
             return $this->reader[$type];
         }
@@ -82,17 +84,19 @@ class PhpConfigMaker {
 
     /**
      * 
+     * @param array $readers An array which contains the dependency key and the name of the used {@see SettingReader}
      * @param \DOMElement $setting the element which dependencies should be checked
      * @param array $configuration An array containing the currently enters configuration
      * @return boolean Returns true if the dependencies for the element are satisfied
      */
-    private function checkDepends(\DOMElement $setting, array $configuration) {
+    private function checkDepends(array $readers, \DOMElement $setting, array $configuration) {
         if ($setting->hasAttribute("depends")) {
-            if (isset($configuration[$setting->getAttribute("depends")])) {
+            $depKey = $setting->getAttribute("depends");
+            if (isset($configuration[$depKey]) && isset($readers[$depKey])) {
                 if ($setting->hasAttribute("depends-equals")) {
-                    return $configuration[$setting->getAttribute("depends")] == $setting->getAttribute("depends-equals");
+                    return $this->getReader($readers[$depKey])->equalsDependency($setting->getAttribute("depends-equals"), $configuration[$setting->getAttribute("depends")]);
                 } else {
-                    return !in_array($configuration[$setting->getAttribute("depends")], array(false, null, ""));
+                    return !in_array($configuration[$depKey], array(false, null, ""));
                 }
             } else {
                 return false;
@@ -101,6 +105,7 @@ class PhpConfigMaker {
             return true;
         }
     }
+
     /**
      * Returns a new {@see PhpConfigMaker} with the basic {@see SettingReader}s loaded
      * @param string $xmlFile The fime name of the .xml file which contains the settings
@@ -114,10 +119,12 @@ class PhpConfigMaker {
         $p->addReader(new reader\MultiListChoice());
         $p->addReader(new reader\Number());
         $p->addReader(new reader\Text());
+        $p->addReader(new reader\Hidden());
         return $p;
     }
 
 }
+
 /**
  * NoReaderFound Exception 
  */

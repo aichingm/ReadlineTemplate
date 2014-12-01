@@ -45,6 +45,13 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="defaultGroup" />
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="Hidden">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="defaultGroup" />
+                    </xs:complexType>
+                </xs:element>                
                 <xs:element name="ListChoice">
                     <xs:complexType>
                         <xs:group ref="ListGroup" />
