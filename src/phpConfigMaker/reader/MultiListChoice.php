@@ -1,9 +1,18 @@
 <?php
+
 namespace phpConfigMaker\reader;
+
 use phpConfigMaker\SettingReader;
 
+/**
+ * This {@see SettingReader} can handle "MultiListChoice" elements
+ * @author Mario Aichinger <aichingm@gmail.com>
+ */
 class MultiListChoice extends SettingReader {
 
+    /**
+     * {@inheritdoc}
+     */
     public function ask($prompt) {
         $items = $this->getSetting()->getElementsByTagName("Item");
         $min = $max = "";
@@ -42,14 +51,26 @@ class MultiListChoice extends SettingReader {
         return $answerItems;
     }
 
+    /**
+     * Returns the type of element which can be handled by this class in this case "MultiListChoice"
+     * @return string Returns "MultiListChoice"
+     */
     public function handleElement() {
-        return "MultiListSperated";
+        return "MultiListChoice";
     }
+
+    /**
+     * {@inheritdoc}
+     */
     public function convertDefault($default) {
         return explode($this->getSetting()->getAttribute("seperator"), $default);
     }
+
+    /**
+     * {@inheritdoc}
+     */
     public function equalsDependency($dependencyEquals, $value) {
         return parent::equalsDependency($dependencyEquals, implode($this->getSetting()->getAttribute("seperator"), $value));
     }
-}
 
+}

@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+<!--
+
+If your settings.xml file is valid aginst this schema there should be no problem at running it 
+
+-->
 <xs:schema version="1.0"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            elementFormDefault="qualified">
@@ -33,7 +38,7 @@
                         <xs:attributeGroup ref="dependsGroup" />
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="MultiListSperated">
+                <xs:element name="MultiListChoice">
                     <xs:complexType>
                         <xs:group ref="ListGroup" />
                         <xs:attributeGroup ref="mustHaveGroup" />
