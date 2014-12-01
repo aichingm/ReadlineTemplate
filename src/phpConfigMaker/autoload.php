@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Autoload
+ * require this file to enavle autoloading for the programm
+ */
 spl_autoload_register(function($className) {
     $className = ltrim($className, '\\');
     $fileName = '';

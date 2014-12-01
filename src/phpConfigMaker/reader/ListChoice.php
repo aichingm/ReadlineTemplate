@@ -1,9 +1,18 @@
 <?php
+
 namespace phpConfigMaker\reader;
+
 use phpConfigMaker\SettingReader;
 
+/**
+ * This {@see SettingReader} can handle "ListChoice" elements
+ * @author Mario Aichinger <aichingm@gmail.com>
+ */
 class ListChoice extends SettingReader {
 
+    /**
+     * {@inheritdoc}
+     */
     public function ask($prompt) {
         $items = $this->getSetting()->getElementsByTagName("Item");
         echo "Select one item by entering its number:" . PHP_EOL;
@@ -17,6 +26,10 @@ class ListChoice extends SettingReader {
         return $items->item(intval($answer))->attributes->getNamedItem("value")->value;
     }
 
+    /**
+     * Returns the type of element which can be handled by this class in this case "ListChoice"
+     * @return string Returns "ListChoice"
+     */
     public function handleElement() {
         return "ListChoice";
     }
