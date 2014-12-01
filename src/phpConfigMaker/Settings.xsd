@@ -31,49 +31,47 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="defaultGroup" />
                     </xs:complexType>
                 </xs:element>
-            </xs:choice>                
-            <xs:element name="Number">
-                <xs:complexType>
-                    <xs:attributeGroup ref="mustHaveGroup" />
-                    <xs:attributeGroup ref="dependsGroup" />
-                    <xs:attributeGroup ref="defaultGroup" />
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="Integer">
-                <xs:complexType>
-                    <xs:attributeGroup ref="mustHaveGroup" />
-                    <xs:attributeGroup ref="dependsGroup" />
-                    <xs:attributeGroup ref="defaultGroup" />
-                </xs:complexType>
-            </xs:element>
-        </xs:choice>
-        <xs:element name="ListChoice">
-            <xs:complexType>
-                <xs:group ref="ListGroup" />
-                <xs:attributeGroup ref="mustHaveGroup" />
-                <xs:attributeGroup ref="dependsGroup" />
-            </xs:complexType>
-        </xs:element>
-        <xs:element name="MultiListChoice">
-            <xs:complexType>
-                <xs:group ref="ListGroup" />
-                <xs:attributeGroup ref="mustHaveGroup" />
-                <xs:attributeGroup ref="dependsGroup" />
-                <xs:attributeGroup ref="minMaxGroup" />
-                <xs:attribute name="seperator">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string"/>
-                    </xs:simpleType>
-                </xs:attribute>
-            </xs:complexType>
-        </xs:element>
-        <xs:element name="Boolean">
-            <xs:complexType>
-                <xs:attributeGroup ref="mustHaveGroup" />
-                <xs:attributeGroup ref="dependsGroup" />
-            </xs:complexType>
-        </xs:element>
-    </xs:choice>
+                <xs:element name="Number">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="defaultGroup" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Integer">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="defaultGroup" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ListChoice">
+                    <xs:complexType>
+                        <xs:group ref="ListGroup" />
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="MultiListChoice">
+                    <xs:complexType>
+                        <xs:group ref="ListGroup" />
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="minMaxGroup" />
+                        <xs:attribute name="seperator">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string"/>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Boolean">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
         </xs:complexType>
     </xs:element>
     <xs:group name="ListGroup">
