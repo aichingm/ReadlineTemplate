@@ -10,11 +10,19 @@ use phpConfigMaker\SettingWriter;
  * @author mario
  */
 class PhpWriter extends SettingWriter {
+    private $arrayName = "config";
+    function getArrayName() {
+        return $this->arrayName;
+    }
 
-    public function write($filename) {
+    function setArrayName($arrayName) {
+        $this->arrayName = $arrayName;
+    }
+
+        public function write($filename) {
         $out = "<?php".PHP_EOL;
         foreach ($this->getConfiguration() as $key => $value) {
-            $out .= '$config[' . var_export($key, true) . '] = ' . var_export($value, true) . ';' . PHP_EOL;
+            $out .= '$'.$this->getArrayName().'[' . var_export($key, true) . '] = ' . var_export($value, true) . ';' . PHP_EOL;
         }
         file_put_contents($filename, $out);
     }
