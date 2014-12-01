@@ -2,24 +2,31 @@
 <Settings
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xsi:noNamespaceSchemaLocation='file:/home/mario/NetBeansProjects/php-config-maker/src/phpConfigMaker/Settings.xsd'>
-    <Text key="admin_password" prompt="Password for user admin: " default="admin" exclude="from-config"/>
+    <!-- admin -->
+    <Text key="_admin_password" prompt="Password for user admin: " default="admin" exclude="from-config"/>
+    <!-- database -->
     <ListChoice key="database_type" prompt="Select the type of database you want to use: ">
         <Item value="mysql"/>
         <Item value="sqlite"/>
     </ListChoice>
-    <Text key="database_mysql_server" prompt="Mysql server [localhost]: " default="localhost" depends="sqltype" depends-equals="mysql" />
-    <Text key="mysql_username" prompt="Mysql username: " depends="database_type" depends-equals="mysql" />
-    <Text key="mysql_password" prompt="Mysql password: " depends="database_type" depends-equals="mysql" />
-    <Text key="database_database" prompt="Mysql Database name: " depends="database_type" depends-equals="mysql" />
+    <!-- mysql -->
+    <Text key="database_mysql_server" prompt="Mysql server [localhost]: " default="localhost" depends="database_type" depends-equals="mysql" />
+    <Text key="database_mysql_username" prompt="Mysql username: " depends="database_type" depends-equals="mysql" />
+    <Text key="database_mysql_password" prompt="Mysql password: " depends="database_type" depends-equals="mysql" />
+    <Text key="database_database" prompt="Mysql database name: " depends="database_type" depends-equals="mysql" />
     <Text key="database_table_prefix" prompt="Mysql table prefix: " depends="database_type" depends-equals="mysql" />
     <Boolean key="_mysql_renew_database" prompt="Delete existing database: " exclude="from-config" depends="database_type" depends-equals="mysql" />
     <Boolean key="_mysql_renew_table" prompt="Delete existing tables " exclude="from-config" depends="_mysql_renew_database" depends-equals="false" />
-    
-  
-    <Text key="sqlite_file" prompt="Sqlite file: " depends="database_type" depends-equals="sqlite" />
+    <!-- sqlite -->
+    <Text key="database_sqlite_path" prompt="Sqlite file: " depends="database_type" depends-equals="sqlite" />
     <Text key="database_table_prefix" prompt="Sqlite table prefix: " depends="database_type" depends-equals="sqlite" />
     <Hidden key="database_database" prompt="" default="main" depends="database_type" depends-equals="sqlite" />
-    <Boolean key="_sqlite_renew_database" prompt="Overwrite file if existing: " exclude="from-config" depends="database_type" depends-equals="sqlite" />
-    <Boolean key="_sqlite_renew_table" prompt="Overwrite tables if existing: " exclude="from-config" depends="_sqlite_renew_database" depends-equals="false" />
-    
+    <Boolean key="_sqlite_renew_database" prompt="Overwrite file if existing" exclude="from-config" depends="database_type" depends-equals="sqlite" />
+    <Boolean key="_sqlite_renew_table" prompt="Overwrite tables if existing" exclude="from-config" depends="_sqlite_renew_database" depends-equals="false" />
+    <!-- linkIo -->
+    <ListChoice key="linkIo_version" prompt="Select the LinkIo version you want to use: ">
+        <Item value="1"/>
+        <Item value="2"/>
+    </ListChoice>
+     <Integer key="linkIo_version" prompt="Select the LinkIo version you want to use: " />
 </Settings>
