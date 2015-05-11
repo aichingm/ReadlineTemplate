@@ -51,10 +51,24 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="dependsGroup" />
                         <xs:attributeGroup ref="defaultGroup" />
                     </xs:complexType>
-                </xs:element>                
+                </xs:element>
+                <xs:element name="File">
+                <xs:complexType>
+                    <xs:attributeGroup ref="mustHaveGroup" />
+                    <xs:attributeGroup ref="dependsGroup" />
+                    <xs:attributeGroup ref="fileGroup" />
+                </xs:complexType>
+            </xs:element>
                 <xs:element name="ListChoice">
                     <xs:complexType>
                         <xs:group ref="ListGroup" />
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NamedListChoice">
+                    <xs:complexType>
+                        <xs:group ref="NamedListGroup" />
                         <xs:attributeGroup ref="mustHaveGroup" />
                         <xs:attributeGroup ref="dependsGroup" />
                     </xs:complexType>
@@ -65,7 +79,7 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="mustHaveGroup" />
                         <xs:attributeGroup ref="dependsGroup" />
                         <xs:attributeGroup ref="minMaxGroup" />
-                        <xs:attribute name="seperator">
+                        <xs:attribute name="separator">
                             <xs:simpleType>
                                 <xs:restriction base="xs:string"/>
                             </xs:simpleType>
@@ -90,6 +104,21 @@ If your settings.xml file is valid aginst this schema there should be no problem
             </xs:element>
         </xs:sequence>
     </xs:group>
+    <xs:group name="NamedListGroup">
+        <xs:sequence>
+            <xs:element name="Item"  maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="name" type="xs:string" use="required"/>
+                    <xs:attribute name="value" type="xs:string" use="required"/>
+                    <xs:attribute name="text" type="xs:string" use="optional"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:attributeGroup name="fileGroup">
+        <xs:attribute name="exists" use="required" type="xs:string"/>
+        <xs:attribute name="extension" use="optional" type="xs:string"/>
+    </xs:attributeGroup>
     <xs:attributeGroup name="dependsGroup">
         <xs:attribute name="depends" use="optional" type="xs:string" />
         <xs:attribute name="depends-equals" use="optional" type="xs:string" />
@@ -112,7 +141,7 @@ If your settings.xml file is valid aginst this schema there should be no problem
     <xs:attributeGroup name="defaultGroup">
         <xs:attribute name="default" use="optional" type="xs:string" />
     </xs:attributeGroup>
-    <xs:attributeGroup name="seperatorGroup">
-        <xs:attribute name="seperator" type="xs:string" />    
+    <xs:attributeGroup name="separatorGroup">
+        <xs:attribute name="separator" type="xs:string" />
     </xs:attributeGroup>
 </xs:schema>

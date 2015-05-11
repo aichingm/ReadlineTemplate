@@ -58,18 +58,18 @@ abstract class SettingReader {
     protected function readline($prompt) {
         if (!function_exists("readline")) {
             echo $prompt;
-            return rtrim(fgets(STDIN), "\n");
+            return rtrim(fgets(STDIN), "\r\n");
         } else {
             return readline($prompt);
         }
     }
     /**
      * Reads a line from the command line and trims all whitespace from the beginn and the end. Uses {@see SettingReader::readLine($prompt)} to read data from the command line.
-     * @param type $prompt The prompt which indecates what data the user should enter
+     * @param string $prompt The prompt which indecates what data the user should enter
      * @return string Returns the trimed string
      */
     protected function readlineTrimAll($prompt) {
-        return trim(readline($prompt));
+        return trim($this->readline($prompt));
     }
     /**
      * Reads a boolean from the coomand line interface. 

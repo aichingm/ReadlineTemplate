@@ -16,7 +16,7 @@ class Integer extends SettingReader {
     public function ask($prompt) {
         do {
             $line = $this->readlineTrimAll($prompt);
-        } while (is_int(intval($line)));
+        } while (preg_match("~^[-+]?[0-9]+$~", $line) !== 1);
         return intval($line);
     }
 

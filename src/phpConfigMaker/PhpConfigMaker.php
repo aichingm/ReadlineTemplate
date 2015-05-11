@@ -116,10 +116,12 @@ class PhpConfigMaker {
         $p->addReader(new reader\Boolean());
         $p->addReader(new reader\Integer());
         $p->addReader(new reader\ListChoice());
+        $p->addReader(new reader\NamedListChoice());
         $p->addReader(new reader\MultiListChoice());
         $p->addReader(new reader\Number());
         $p->addReader(new reader\Text());
         $p->addReader(new reader\Hidden());
+        $p->addReader(new reader\File());
         return $p;
     }
 
