@@ -36,6 +36,7 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="mustHaveGroup" />
                         <xs:attributeGroup ref="dependsGroup" />
                         <xs:attributeGroup ref="defaultGroup" />
+                        <xs:attributeGroup ref="minMaxGroup" />
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="Integer">
@@ -43,6 +44,7 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="mustHaveGroup" />
                         <xs:attributeGroup ref="dependsGroup" />
                         <xs:attributeGroup ref="defaultGroup" />
+                        <xs:attributeGroup ref="minMaxGroup" />
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="Hidden">
@@ -53,12 +55,12 @@ If your settings.xml file is valid aginst this schema there should be no problem
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="File">
-                <xs:complexType>
-                    <xs:attributeGroup ref="mustHaveGroup" />
-                    <xs:attributeGroup ref="dependsGroup" />
-                    <xs:attributeGroup ref="fileGroup" />
-                </xs:complexType>
-            </xs:element>
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="fileGroup" />
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="ListChoice">
                     <xs:complexType>
                         <xs:group ref="ListGroup" />
@@ -71,6 +73,8 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:group ref="NamedListGroup" />
                         <xs:attributeGroup ref="mustHaveGroup" />
                         <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="minMaxGroup" />
+                        <xs:attributeGroup ref="seperatorGroup" />
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="MultiListChoice">
@@ -79,11 +83,7 @@ If your settings.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="mustHaveGroup" />
                         <xs:attributeGroup ref="dependsGroup" />
                         <xs:attributeGroup ref="minMaxGroup" />
-                        <xs:attribute name="separator">
-                            <xs:simpleType>
-                                <xs:restriction base="xs:string"/>
-                            </xs:simpleType>
-                        </xs:attribute>
+                        <xs:attributeGroup ref="seperatorGroup" />
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="Boolean">
@@ -141,7 +141,7 @@ If your settings.xml file is valid aginst this schema there should be no problem
     <xs:attributeGroup name="defaultGroup">
         <xs:attribute name="default" use="optional" type="xs:string" />
     </xs:attributeGroup>
-    <xs:attributeGroup name="separatorGroup">
-        <xs:attribute name="separator" type="xs:string" />
+    <xs:attributeGroup name="seperatorGroup">
+        <xs:attribute name="seperator" type="xs:string" />
     </xs:attributeGroup>
 </xs:schema>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoload
  * require this file to enavle autoloading for the programm
@@ -13,5 +14,10 @@ spl_autoload_register(function($className) {
         $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-    require_once __DIR__ . "/../" .$fileName;
+    $fileName = __DIR__ . "/" . $fileName;
+    if (is_file($fileName)) {
+        require_once $fileName;
+    } else {
+        throw new Exception("Autoload failed! File: " . $fileName);
+    }
 });

@@ -1,38 +1,38 @@
 <?php
 
-namespace phpConfigMaker;
+namespace ReadlineTemplate;
 
 /**
  * Use this class to ask the user to enter the required settings from a .xml file
  * @author Mario Aichinger <aichingm@gmail.com>
  */
-class PhpConfigMaker {
+class ReadlineTemplate {
 
     /**
-     * Holds the file name of the .xml file 
+     * Holds the template
      * @var string
      */
-    private $xmlFile;
+    private $template;
 
     /**
-     * Holds references to the used SettingReaders (aSettingReader questions the user to enter data)
+     * Holds references to the used DataReaders (a DataReader questions the user to enter data)
      * @var array
      */
     private $reader = array();
 
     /**
-     * Creates a new PhpConfigMaker object with out any SettingReader loaded
-     * @param string $xmlFile the file name of the .xml file which contains the settings structure
+     * Creates a new PhpConfigMaker object with out any DataReader loaded
+     * @param string $template the template in xml format
      */
-    function __construct($xmlFile) {
-        $this->xmlFile = $xmlFile;
+    function __construct($template) {
+        $this->template = $template;
     }
 
     /**
-     * Adds a {@see \phpConfigMaker\SettingReader} the loaded SettingReaders
-     * @param SettingReader $settingReader The SettingReader which should be added
+     * Adds a {@see \ReadlineTemplate\DataReader} the loaded DataReader
+     * @param DataReader $settingReader The DataReader which should be added
      */
-    public function addReader(SettingReader $settingReader) {
+    public function addReader(DataReader $settingReader) {
         $this->reader[$settingReader->handleElement()] = $settingReader;
     }
 
@@ -43,7 +43,7 @@ class PhpConfigMaker {
      */
     public function run() {
         $dom = new \DOMDocument();
-        $dom->load($this->xmlFile);
+        $dom->loadXML($this->template);
         $answers = array();
         $configuration = array();
         $requestedReader = array();
@@ -71,9 +71,9 @@ class PhpConfigMaker {
 
     /**
      * Returns the reader which is used to ask the user so enter data for this type of setting
-     * @param string $type the type of setting for which a {@see SettingReader} is searched
-     * @return \SettingReader Returns a {@see SettingReader} or if none is fund throws a  {@see NoReaderFound} exception
-     * @throws NoReaderFound Throws a {@see NoReaderFound} exception if no {@see SettingReader} for the $type of element is added via {@see PhpConfigMaker::addReader()}
+     * @param string $type the type of setting for which a {@see DataReader} is searched
+     * @return \DataReader Returns a {@see SetDataReaderr if none is fund throws a  {@see NoReaderFound} exception
+     * @throws NoReaderFound Throws a {@see NoReaderFound} exception if no {@see DataReader} for the $type of element is added via {@see PhpConfigMaker::addReader()}
      */
     private function &getReader($type) {
         if (isset($this->reader[$type])) {
@@ -84,7 +84,7 @@ class PhpConfigMaker {
 
     /**
      * 
-     * @param array $readers An array which contains the dependency key and the name of the used {@see SettingReader}
+     * @param array $readers An array which contains the dependency key and the name of the used {@see DataReader}
      * @param \DOMElement $setting the element which dependencies should be checked
      * @param array $configuration An array containing the currently enters configuration
      * @return boolean Returns true if the dependencies for the element are satisfied
@@ -106,23 +106,23 @@ class PhpConfigMaker {
         }
     }
 
-    /**
-     * Returns a new {@see PhpConfigMaker} with the basic {@see SettingReader}s loaded
-     * @param string $xmlFile The fime name of the .xml file which contains the settings
-     * @return \phpConfigMaker\PhpConfigMaker
-     */
-    public static function init($xmlFile) {
-        $p = new PhpConfigMaker($xmlFile);
-        $p->addReader(new reader\Boolean());
-        $p->addReader(new reader\Integer());
-        $p->addReader(new reader\ListChoice());
-        $p->addReader(new reader\NamedListChoice());
-        $p->addReader(new reader\MultiListChoice());
-        $p->addReader(new reader\Number());
-        $p->addReader(new reader\Text());
-        $p->addReader(new reader\Hidden());
-        $p->addReader(new reader\File());
-        return $p;
+    public function loadDefaultReader() {
+        $this->addReader(new reader\Boolean());
+        $this->addReader(new reader\Integer());
+        $this->addReader(new reader\ListChoice());
+        $this->addReader(new reader\NamedListChoice());
+        $this->addReader(new reader\MultiListChoice());
+        $this->addReader(new reader\Number());
+        $this->addReader(new reader\Text());
+        $this->addReader(new reader\Hidden());
+        $this->addReader(new reader\File());
+    }
+
+    public function isValidTemplate() {
+        $dom = new \DOMDocument();
+        $dom->loadXML($this->template);
+        libxml_use_internal_errors(false);
+        return $dom->schemaValidate(__DIR__ . DIRECTORY_SEPARATOR . "Settings.xsd");
     }
 
 }

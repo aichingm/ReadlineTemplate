@@ -1,14 +1,14 @@
 <?php
 
-namespace phpConfigMaker\reader;
+namespace ReadlineTemplate\reader;
 
-use phpConfigMaker\SettingReader;
+use ReadlineTemplate\DataReader;
 
 /**
- * This {@see SettingReader} can handle "Text" elements
+ * This {@see DataReader} can handle "Text" elements
  * @author Mario Aichinger <aichingm@gmail.com>
  */
-class File extends SettingReader {
+class File extends DataReader {
 
     /**
      * {@inheritdoc}
@@ -24,6 +24,9 @@ class File extends SettingReader {
                 break;
             }
             if($exists == "false" && !is_file($line) && ($extension == null || strrpos($line, $extension) + strlen($extension) === strlen($line))) {
+                break;
+            }
+            if($exists == "" && ($extension == null || strrpos($line, $extension) + strlen($extension) === strlen($line))) {
                 break;
             }
         }

@@ -1,14 +1,14 @@
 <?php
 
-namespace phpConfigMaker\reader;
+namespace ReadlineTemplate\reader;
 
-use phpConfigMaker\SettingReader;
+use ReadlineTemplate\DataReader;
 
 /**
- * This {@see SettingReader} can handle "Hidden" elements. This class will generate no out put or prompt. It will quietly generate a configuration entry.
+ * This {@see DataReader} can handle "Hidden" elements. This class will generate no out put or prompt. It will quietly generate a configuration entry.
  * @author Mario Aichinger <aichingm@gmail.com>
  */
-class Hidden extends SettingReader {
+class Hidden extends DataReader {
 
     /**
      * {@inheritdoc}

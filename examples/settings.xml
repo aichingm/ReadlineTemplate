@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Settings
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xsi:noNamespaceSchemaLocation="../src/phpConfigMaker/Settings.xsd">
+    xsi:noNamespaceSchemaLocation="../src/ReadlineTemplate/Settings.xsd">
     <!-- admin -->
     <Text key="_admin_password" prompt="Password for user admin: " default="admin" exclude="from-config"/>
     <!-- database -->

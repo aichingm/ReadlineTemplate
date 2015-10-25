@@ -1,14 +1,14 @@
 <?php
 
-namespace phpConfigMaker\reader;
+namespace ReadlineTemplate\reader;
 
-use phpConfigMaker\SettingReader;
+use ReadlineTemplate\DataReader;
 
 /**
- * This {@see SettingReader} can handle "MultiListChoice" elements
+ * This {@see DataReader} can handle "MultiListChoice" elements
  * @author Mario Aichinger <aichingm@gmail.com>
  */
-class MultiListChoice extends SettingReader {
+class MultiListChoice extends DataReader {
 
     /**
      * {@inheritdoc}
@@ -17,34 +17,31 @@ class MultiListChoice extends SettingReader {
         $items = $this->getSetting()->getElementsByTagName("Item");
         $min = $max = "";
         if ($this->getSetting()->hasAttribute("min")) {
-            $min = "minimum amount of values is " . $this->getSetting()->hasAttribute("min");
+            $min = " the minimum amount of values is " . $this->getSetting()->getAttribute("min");
         }
         if ($this->getSetting()->hasAttribute("max")) {
-            $max = " maximum amount of values is " . $this->getSetting()->hasAttribute("max");
+            $max = " the maximum amount of values is " . $this->getSetting()->getAttribute("max");
         }
-        echo "Select multiple items separated with '" . $this->getSetting()->getAttribute("separator") . "'" . $min . $max . PHP_EOL;
-        for ($index = 0; $index < $items->length; $index++) {
-            echo str_repeat("", strlen(strval($items->length)) - strlen(strval($index))) . $index . " " . $items->item($index)->attributes->getNamedItem("value")->value . PHP_EOL;
+        echo "Select multiple items seperated with '" . $this->getSetting()->getAttribute("seperator") . "'" . $min . $max . ": " . PHP_EOL;
+        for ($index = 1; $index-1 < $items->length; $index++) {
+            echo str_repeat("", strlen(strval($items->length)) - strlen(strval($index))) . $index . " " . $items->item($index-1)->attributes->getNamedItem("value")->value . PHP_EOL;
         }
         $answerItems = null;
         $run = true;
         while ($run) {
-            $answer = $this->readline($prompt);
-            if ($answer == "") {
-                continue;
-            } $answerItems = array_unique(explode($this->getSetting()->getAttribute("separator"), $answer));
             $run = FALSE;
+            $answer = $this->readline($prompt);
+            
+            $answerItems = array_unique(explode($this->getSetting()->getAttribute("seperator"), $answer));
             foreach ($answerItems as &$value) {
-                if (intval($value) < 0 || intval($value) > $items->length) {
+                if (intval($value) < 1 || intval($value) > $items->length+1) {
                     $run = TRUE;
-                } else {
-                    $value = $items->item(intval($value))->attributes->getNamedItem("value")->value;
                 }
             }
             if ($this->getSetting()->hasAttribute("min") && count($answerItems) < intval($this->getSetting()->getAttribute("min"))) {
                 $run = true;
             }
-            if ($this->getSetting()->hasAttribute("max") && count($answerItems) > interface_exists($this->getSetting()->getAttribute("max"))) {
+            if ($this->getSetting()->hasAttribute("max") && count($answerItems) > intval($this->getSetting()->getAttribute("max"))) {
                 $run = true;
             }
         }
@@ -63,7 +60,7 @@ class MultiListChoice extends SettingReader {
      * {@inheritdoc}
      */
     public function convertDefault($default) {
-        return explode($this->getSetting()->getAttribute("separator"), $default);
+        return explode($this->getSetting()->getAttribute("seperator"), $default);
     }
 
     /**

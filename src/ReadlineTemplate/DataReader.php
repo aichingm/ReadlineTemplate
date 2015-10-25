@@ -1,13 +1,13 @@
 <?php
 
-namespace phpConfigMaker;
+namespace ReadlineTemplate;
 
 /**
- * abstract class SettingReader
- * This is the base class for all SettingReaders. 
+ * abstract class DataReader
+ * This is the base class for all DataReaders. 
  * @author Mario Aichinger <aichingm@gmail.com>
  */
-abstract class SettingReader {
+abstract class DataReader {
 
     /**
      * Holds the current element is should be asked the usre to ener data for. The 'current' means the the element changes from time to time
@@ -16,7 +16,7 @@ abstract class SettingReader {
     private $setting;
 
     /**
-     * Prepare for SettingReader::ask($p)
+     * Prepare for DataReader::ask($p)
      * @param \DOMElement $setting The element which should be asked next
      */
     public function setUp(\DOMElement $setting) {
@@ -64,7 +64,7 @@ abstract class SettingReader {
         }
     }
     /**
-     * Reads a line from the command line and trims all whitespace from the beginn and the end. Uses {@see SettingReader::readLine($prompt)} to read data from the command line.
+     * Reads a line from the command line and trims all whitespace from the beginn and the end. Uses {@see DataReader::readLine($prompt)} to read data from the command line.
      * @param string $prompt The prompt which indecates what data the user should enter
      * @return string Returns the trimed string
      */
@@ -75,7 +75,7 @@ abstract class SettingReader {
      * Reads a boolean from the coomand line interface. 
      * @param string $prompt The prompt which indecates what data the user should enter. Note that $prompt will be prepended to "[Y/n]: " or "[y/N]: " depending on the value of $defaultYes.
      * @param string $defaultYes If set to true the function will accept an empty string from the user as a "yes" or to false if an empty string should represent false
-     * @return boolean Returns true or false whether the user entered "yes" or "no". Note that {@see SettingReader::isYes($str)} function is uses to determine what the user entered 
+     * @return boolean Returns true or false whether the user entered "yes" or "no". Note that {@see DataReader::isYes($str)} function is uses to determine what the user entered 
      */
     protected function readlineYesNo($prompt, $defaultYes = true) {
         if ($defaultYes) {

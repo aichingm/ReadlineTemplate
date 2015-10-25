@@ -1,8 +1,8 @@
 <?php
 
-namespace phpConfigMaker\writer;
+namespace ReadlineTemplate\writer;
 
-use phpConfigMaker\SettingWriter;
+use ReadlineTemplate\SettingWriter;
 
 /**
  * Description of PhpWriter

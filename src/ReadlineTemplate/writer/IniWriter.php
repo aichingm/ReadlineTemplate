@@ -1,8 +1,8 @@
 <?php
 
-namespace phpConfigMaker\writer;
+namespace ReadlineTemplate\writer;
 
-use phpConfigMaker\SettingWriter;
+use ReadlineTemplate\SettingWriter;
 
 /**
  * Description of IniWriter
@@ -15,7 +15,7 @@ class IniWriter extends SettingWriter {
         $out = "";
         foreach ($this->getConfiguration() as $key => $value) {
             if (is_array($value) || is_object($value)) {
-                throw new \InvalidArgumentException("IniWriter can not handle arrays or objects");
+                throw new \InvalidArgumentException("IniWriter can not handle arrays nor objects");
             }
             if (strpos("=", $key) !== FALSE) {
                 throw new \InvalidArgumentException("IniWriter can not handle '=' in configuration keys");

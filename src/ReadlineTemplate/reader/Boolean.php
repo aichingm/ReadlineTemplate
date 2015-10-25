@@ -1,14 +1,14 @@
 <?php
 
-namespace phpConfigMaker\reader;
+namespace ReadlineTemplate\reader;
 
-use phpConfigMaker\SettingReader;
+use ReadlineTemplate\DataReader;
 
 /**
- * This {@see SettingReader} can handle "Boolean" elements
+ * This {@see DataReader} can handle "Boolean" elements
  * @author Mario Aichinger <aichingm@gmail.com>
  */
-class Boolean extends SettingReader {
+class Boolean extends DataReader {
 
     /**
      * {@inheritdoc}

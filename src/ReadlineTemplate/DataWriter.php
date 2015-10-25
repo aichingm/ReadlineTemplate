@@ -1,12 +1,12 @@
 <?php
 
-namespace phpConfigMaker;
+namespace ReadlineTemplate;
 
 /**
  * Base class for all Writer classes
  * @author Mario Aichinger <aichingm@gmail.com>
  */
-abstract class SettingWriter {
+abstract class DataWriter {
     /**
      * Holds the data which should be written to a file
      * @var array
