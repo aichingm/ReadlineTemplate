@@ -248,4 +248,4 @@ _Data_
     )
 
 
-__Note:__ The user will have to enter the test before the colon to select the Item.
+__Note:__ The user will have to enter the text before the colon to select the item.
