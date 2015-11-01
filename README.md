@@ -4,6 +4,10 @@ Readline Template
 A php library which asks the user to feed you php application with certain data. 
 The structure and questions are defined in a .xml file.
 
+Requirements
+============
+
+*. php readline extension
 
 Installation
 ============
