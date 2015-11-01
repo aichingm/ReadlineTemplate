@@ -7,29 +7,33 @@ namespace ReadlineTemplate;
  * @author Mario Aichinger <aichingm@gmail.com>
  */
 abstract class DataWriter {
+
     /**
-     * Holds the data which should be written to a file
+     * Holds the data which should be stored
      * @var array
      */
-    private $configuration;
+    private $data;
+
     /**
      * Crates a new DataWriter object
-     * @param array $configuration Contains all data which was should be written to a file
+     * @param array $data Contains all data which will be stored
      */
-    function __construct($configuration) {
-        $this->configuration = $configuration;
+    function __construct($data) {
+        $this->data = $data;
     }
+
     /**
      * Returns the configuration
      * @return array Returns the configuration
      */
-    public function getConfiguration() {
-        return $this->configuration;
+    public function getData() {
+        return $this->data;
     }
+
     /**
-     * Returns true if the configuration was witten to a file or false if not
-     * @param string $filename The file name of the new configuration file
-     * @return boolean Returns true if the configuration was witten to a file or false if not
+     * Returns true if the configuration was stored or false if not
+     * @param array $writeConfiguration The configuration array which contains for example the file destination (checkout the parameter which your writer needs)
+     * @return boolean Returns true if the configuration was stored or false if not
      */
-    public abstract function write($filename);
+    public abstract function write(array $writeConfiguration);
 }

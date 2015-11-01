@@ -21,7 +21,7 @@ class ReadlineTemplate {
     private $reader = array();
 
     /**
-     * Creates a new PhpConfigMaker object with out any DataReader loaded
+     * Creates a new ReadlineTemplate object with out any DataReader loaded
      * @param string $template the template in xml format
      */
     function __construct($template) {
@@ -38,7 +38,7 @@ class ReadlineTemplate {
 
     /**
      * By calling this function the process of asking the user to enter data will be started.
-     * @return array Returns an array like array("extra"=>array(...), "data"=>array(...)) all user enters answers are contained in the array accessable via the "ansers" key all configuration relevant data is stored in the array accessable via the "data" key
+     * @return array Returns an array like array(0 => array(...), array(...), "extra"=>array(...), "data"=>array(...))
      * @throws NoReaderFound Throws a exception if no reader for the element in the .xml is found
      */
     public function run() {
@@ -71,7 +71,7 @@ class ReadlineTemplate {
     }
 
     /**
-     * Returns the reader which is used to ask the user so enter data for this type of element
+     * Returns the reader which is used to ask the user to enter data for this type of element
      * @param string $type the type of element for which a {@see DataReader} is searched
      * @return \DataReader Returns a {@see SetDataReaderr if none is fund throws a  {@see NoReaderFound} exception
      * @throws NoReaderFound Throws a {@see NoReaderFound} exception if no {@see DataReader} for the $type of element is added via {@see PhpConfigMaker::addReader()}
@@ -84,7 +84,7 @@ class ReadlineTemplate {
     }
 
     /**
-     * 
+     * Cecks if all dependencies for the element are satisfied
      * @param array $readerKeyMapping An array which contains the dependency key and the name of the used {@see DataReader}
      * @param \DOMElement $element the element which dependencies should be checked
      * @param array $data An array containing the currently enters configuration
@@ -107,6 +107,9 @@ class ReadlineTemplate {
         }
     }
 
+    /**
+     * Loads all reader which are implmented in /src/ReadlineTemplate/readers/
+     */
     public function loadDefaultReader() {
         $this->addReader(new reader\Boolean());
         $this->addReader(new reader\Integer());
@@ -119,6 +122,11 @@ class ReadlineTemplate {
         $this->addReader(new reader\File());
     }
 
+    /**
+     * Tests if the loaded template complies with the rules defined in a .xsd-schema.
+     * @param string $schema Path to an alternative schema
+     * @return boolean
+     */
     public function isValidTemplate($schema = null) {
         if ($schema == null) {
             $schema = __DIR__ . DIRECTORY_SEPARATOR . "Template.xsd";
