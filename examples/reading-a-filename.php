@@ -3,12 +3,12 @@
 require __DIR__ . '/../src/Autoload.php';
 
 $template = <<<EOF
-<Settings>
+<Template>
     <File key="aExistingCoolFile" exists="true" prompt="Which existing file is cool? "/>
     <File key="aNotExistingCoolFile" exists="false" prompt="Which not existing file is cool? "/>
     <File key="aCoolFile" exists="" prompt="Which existing or not existing file is cool? "/>
     <File key="aCoolPhpFile" exists="true" extension=".php" prompt="Which php file is cool? "/>
-</Settings> 
+</Template> 
         
 EOF;
 
@@ -20,8 +20,8 @@ if (!$rt->isValidTemplate()) {
     exit();
 }
 
-$data = $rt->run();
-foreach ($data["configuration"] as $key => $value) {
+list($data, $extra)  = $rt->run();
+foreach ($data as $key => $value) {
     if (is_array($value)) {
         echo "$key:  " . var_export($value, true) . PHP_EOL;
     } elseif (is_bool($value)) {

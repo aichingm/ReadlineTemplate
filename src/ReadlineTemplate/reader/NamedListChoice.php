@@ -14,18 +14,18 @@ class NamedListChoice extends DataReader {
      * {@inheritdoc}
      */
     public function ask($prompt) {
-        $items = $this->getSetting()->getElementsByTagName("Item");
+        $items = $this->getElement()->getElementsByTagName("Item");
 
 
 
-        if ($this->getSetting()->hasAttribute("min")) {
-            $min = " the minimum amount of values is " . $this->getSetting()->getAttribute("min");
+        if ($this->getElement()->hasAttribute("min")) {
+            $min = " the minimum amount of values is " . $this->getElement()->getAttribute("min");
         }
-        if ($this->getSetting()->hasAttribute("max")) {
-            $max = " the maximum amount of values is " . $this->getSetting()->getAttribute("max");
+        if ($this->getElement()->hasAttribute("max")) {
+            $max = " the maximum amount of values is " . $this->getElement()->getAttribute("max");
         }
-        if($this->getSetting()->hasAttribute("seperator")) {
-            echo "Select multiple items by entering the text before the colon seperated with '" . $this->getSetting()->getAttribute("seperator") . "'" . $min . $max . ": " . PHP_EOL;
+        if($this->getElement()->hasAttribute("separator")) {
+            echo "Select multiple items by entering the text before the colon separated with '" . $this->getElement()->getAttribute("separator") . "'" . $min . $max . ": " . PHP_EOL;
         } else {
 
             echo "Select one item by entering the text before the colon:" . PHP_EOL;
@@ -53,12 +53,12 @@ class NamedListChoice extends DataReader {
         do {
             $run = false;
             $answer = $this->readline($prompt);
-            if ($this->getSetting()->hasAttribute("seperator")) {
-                $answer = array_unique(explode($this->getSetting()->getAttribute("seperator"), $answer));
-                if ($this->getSetting()->hasAttribute("min") && count($answer) < intval($this->getSetting()->getAttribute("min"))) {
+            if ($this->getElement()->hasAttribute("separator")) {
+                $answer = array_unique(explode($this->getElement()->getAttribute("separator"), $answer));
+                if ($this->getElement()->hasAttribute("min") && count($answer) < intval($this->getElement()->getAttribute("min"))) {
                     $run = true;
                 }
-                if ($this->getSetting()->hasAttribute("max") && count($answer) > intval($this->getSetting()->getAttribute("max"))) {
+                if ($this->getElement()->hasAttribute("max") && count($answer) > intval($this->getElement()->getAttribute("max"))) {
                     $run = true;
                 }
                 foreach ($answer as $a) {

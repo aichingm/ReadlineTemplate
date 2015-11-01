@@ -13,14 +13,14 @@ abstract class DataReader {
      * Holds the current element is should be asked the usre to ener data for. The 'current' means the the element changes from time to time
      * @var \DOMElement
      */
-    private $setting;
+    private $element;
 
     /**
      * Prepare for DataReader::ask($p)
-     * @param \DOMElement $setting The element which should be asked next
+     * @param \DOMElement $element The element which should be asked next
      */
-    public function setUp(\DOMElement $setting) {
-        $this->setting = $setting;
+    public function setUp(\DOMElement $element) {
+        $this->element = $element;
     }
 
     /**
@@ -90,14 +90,14 @@ abstract class DataReader {
     }
 
     /**
-     * Returns the element for the currently asked setting
-     * @return \DOMElement Returns the element for the currently asked setting
+     * Returns the element for the currently asked element
+     * @return \DOMElement Returns the element for the currently asked element
      */
-    protected function getSetting() {
-        return $this->setting;
+    protected function getElement() {
+        return $this->element;
     }
     /**
-     * Asks the user to enter appropriate data for the setting
+     * Asks the user to enter appropriate data for the element
      * @param string $prompt The prompt which indecates what data the user should enter
      * @return null|string Returns the data which was enterd by the user or null to indecate that the default value should be used
      */
@@ -109,7 +109,7 @@ abstract class DataReader {
     public abstract function handleElement();
     /**
      * Returns the default value for this type of data.
-     * @param string $default The default value which should be used if the user does not enter data for the setting.
+     * @param string $default The default value which should be used if the user does not enter data for the element.
      * @return mixed Returns the conveted form of the default value
      */
     public function convertDefault($default) {
@@ -117,7 +117,7 @@ abstract class DataReader {
     }
     /**
      * Tests if the "dependency-equals" value from the .xml equals the value which was enterd by the user
-     * @param string $dependencyEquals The value which is set as default in the setting element 
+     * @param string $dependencyEquals The value which is set as default in the element element 
      * @param  mixed $value The value which was entered by the user 
      * @return boolean
      */

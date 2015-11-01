@@ -14,8 +14,8 @@ class File extends DataReader {
      * {@inheritdoc}
      */
     public function ask($prompt) {
-        $exists = $this->getSetting()->getAttribute("exists");
-        $extension = $this->getSetting()->getAttribute("extension");
+        $exists = $this->getElement()->getAttribute("exists");
+        $extension = $this->getElement()->getAttribute("extension");
 
         while (true) {
             $line = $this->readlineTrimAll($prompt);

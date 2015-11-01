@@ -13,7 +13,7 @@ abstract class DataWriter {
      */
     private $configuration;
     /**
-     * Crates a new SettingWriter object
+     * Crates a new DataWriter object
      * @param array $configuration Contains all data which was should be written to a file
      */
     function __construct($configuration) {

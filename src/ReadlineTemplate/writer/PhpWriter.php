@@ -2,14 +2,14 @@
 
 namespace ReadlineTemplate\writer;
 
-use ReadlineTemplate\SettingWriter;
+use ReadlineTemplate\DataWriter;
 
 /**
  * Description of PhpWriter
  *
  * @author mario
  */
-class PhpWriter extends SettingWriter {
+class PhpWriter extends DataWriter {
     private $arrayName = "config";
     function getArrayName() {
         return $this->arrayName;

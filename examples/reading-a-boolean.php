@@ -3,10 +3,9 @@
 require __DIR__ . '/../src/Autoload.php';
 
 $template = <<<EOF
-<Settings>
+<Template>
     <Boolean key="cool" prompt="Isn't this cool? "/>
-</Settings> 
-        
+</Template> 
 EOF;
 
 $rt = new \ReadlineTemplate\ReadlineTemplate($template);
@@ -17,8 +16,8 @@ if(!$rt->isValidTemplate()){
     exit();
 }
         
-$data = $rt->run();
-foreach ($data["configuration"] as $key => $value) {
+list($data, $extra)  = $rt->run();
+foreach ($data as $key => $value) {
     if (is_array($value)) {
         echo "$key:  " . var_export($value, true) . PHP_EOL;
     } elseif (is_bool($value)) {

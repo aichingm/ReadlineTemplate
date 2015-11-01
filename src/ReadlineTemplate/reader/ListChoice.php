@@ -14,7 +14,7 @@ class ListChoice extends DataReader {
      * {@inheritdoc}
      */
     public function ask($prompt) {
-        $items = $this->getSetting()->getElementsByTagName("Item");
+        $items = $this->getElement()->getElementsByTagName("Item");
         echo "Select one item by entering its number:" . PHP_EOL;
         for ($index = 1; $index - 1 < $items->length; $index++) {
             echo str_repeat("", strlen(strval($items->length)) - strlen(strval($index))) . $index . " " . $items->item($index - 1)->attributes->getNamedItem("value")->value . PHP_EOL;

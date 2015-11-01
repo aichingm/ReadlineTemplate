@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Settings
+<Template
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xsi:noNamespaceSchemaLocation="../src/ReadlineTemplate/Settings.xsd">
+    xsi:noNamespaceSchemaLocation="../src/ReadlineTemplate/Template.xsd">
     <!-- admin -->
-    <Text key="_admin_password" prompt="Password for user admin: " default="admin" exclude="from-config"/>
+    <Text key="_admin_password" prompt="Password for user admin: " default="admin" exclude="from-data"/>
     <!-- database -->
     <ListChoice key="database_type" prompt="Select the type of database you want to use: ">
         <Item value="mysql"/>
@@ -15,17 +15,17 @@
     <Text key="database_mysql_password" prompt="Mysql password: " depends="database_type" depends-equals="mysql" />
     <Text key="database_database" prompt="Mysql database name: " depends="database_type" depends-equals="mysql" />
     <Text key="database_table_prefix" prompt="Mysql table prefix: " depends="database_type" depends-equals="mysql" />
-    <Boolean key="_mysql_renew_database" prompt="Delete existing database: " exclude="from-config" depends="database_type" depends-equals="mysql" />
-    <Boolean key="_mysql_renew_table" prompt="Delete existing tables " exclude="from-config" depends="_mysql_renew_database" depends-equals="false" />
+    <Boolean key="_mysql_renew_database" prompt="Delete existing database: " exclude="from-data" depends="database_type" depends-equals="mysql" />
+    <Boolean key="_mysql_renew_table" prompt="Delete existing tables " exclude="from-data" depends="_mysql_renew_database" depends-equals="false" />
     <!-- sqlite -->
     <Text key="database_sqlite_path" prompt="Sqlite file: " depends="database_type" depends-equals="sqlite" />
     <Text key="database_table_prefix" prompt="Sqlite table prefix: " depends="database_type" depends-equals="sqlite" />
     <Hidden key="database_database" prompt="" default="main" depends="database_type" depends-equals="sqlite" />
-    <Boolean key="_sqlite_renew_database" prompt="Overwrite file if existing" exclude="from-config" depends="database_type" depends-equals="sqlite" />
-    <Boolean key="_sqlite_renew_table" prompt="Overwrite tables if existing" exclude="from-config" depends="_sqlite_renew_database" depends-equals="false" />
+    <Boolean key="_sqlite_renew_database" prompt="Overwrite file if existing" exclude="from-data" depends="database_type" depends-equals="sqlite" />
+    <Boolean key="_sqlite_renew_table" prompt="Overwrite tables if existing" exclude="from-data" depends="_sqlite_renew_database" depends-equals="false" />
     <!-- api version -->
     <ListChoice key="api_version" prompt="Select the api version you want to use: ">
         <Item value="1" />
         <Item value="2"/>
     </ListChoice>
-</Settings>
+</Template>

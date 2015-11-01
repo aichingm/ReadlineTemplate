@@ -18,16 +18,16 @@ class Number extends DataReader {
         while ($flag) {
             $flag = false;
             $line = $this->readlineTrimAll($prompt);
-            if (empty($line) && $this->getSetting()->hasAttribute("default")) {
+            if (empty($line) && $this->getElement()->hasAttribute("default")) {
                 return null;
             }
             if (preg_match("~^[-+]?[1-9]*[0-9]+((\.|,)[0-9]+)?~", $line) !== 1) {
                 $flag = true;
             }
-            if ($this->getSetting()->hasAttribute("min") && $this->getSetting()->getAttribute("min") > doubleval($line)) {
+            if ($this->getElement()->hasAttribute("min") && $this->getElement()->getAttribute("min") > doubleval($line)) {
                 $flag = true;
             }
-            if ($this->getSetting()->hasAttribute("max") && $this->getSetting()->getAttribute("max") < doubleval($line)) {
+            if ($this->getElement()->hasAttribute("max") && $this->getElement()->getAttribute("max") < doubleval($line)) {
                 $flag = true;
             }
         }

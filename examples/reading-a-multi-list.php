@@ -3,20 +3,20 @@
 require __DIR__ . '/../src/Autoload.php';
 
 $template = <<<EOF
-<Settings>
-    <MultiListChoice key="coolCharactersAre" prompt="Which one is cooler? "  seperator=",">
+<Template>
+    <MultiListChoice key="coolCharactersAre" prompt="Which one is cooler? "  separator=",">
         <Item value="A"/>
         <Item value="B"/>
         <Item value="C"/>
         <Item value="D"/>
     </MultiListChoice>
-    <MultiListChoice key="2coolCharactersAre" prompt="Which one is cooler? " min="2" max="2" seperator=",">
+    <MultiListChoice key="2coolCharactersAre" prompt="Which one is cooler? " min="2" max="2" separator=",">
         <Item value="A"/>
         <Item value="B"/>
         <Item value="C"/>
         <Item value="D"/>
     </MultiListChoice>
-</Settings>
+</Template>
 EOF;
 
 $rt = new \ReadlineTemplate\ReadlineTemplate($template);
@@ -27,8 +27,8 @@ if (!$rt->isValidTemplate()) {
     exit();
 }
 
-$data = $rt->run();
-foreach ($data["configuration"] as $key => $value) {
+list($data, $extra)  = $rt->run();
+foreach ($data as $key => $value) {
     if (is_array($value)) {
         echo "$key:  " . var_export($value, true) . PHP_EOL;
     } elseif (is_bool($value)) {

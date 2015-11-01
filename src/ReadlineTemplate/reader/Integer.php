@@ -18,17 +18,17 @@ class Integer extends DataReader {
         while ($flag) {
             $flag = false;
             $line = $this->readlineTrimAll($prompt);
-            if(empty($line) && $this->getSetting()->hasAttribute("default")){
+            if(empty($line) && $this->getElement()->hasAttribute("default")){
                 return null;
             }
 
             if (preg_match("~^[-+]?[0-9]+$~", $line) !== 1) {
                 $flag = true;
             }
-            if ($this->getSetting()->hasAttribute("min") && $this->getSetting()->getAttribute("min") > intval($line)) {
+            if ($this->getElement()->hasAttribute("min") && $this->getElement()->getAttribute("min") > intval($line)) {
                 $flag = true;
             }
-            if ($this->getSetting()->hasAttribute("max") && $this->getSetting()->getAttribute("max") < intval($line)) {
+            if ($this->getElement()->hasAttribute("max") && $this->getElement()->getAttribute("max") < intval($line)) {
                 $flag = true;
             }
         }

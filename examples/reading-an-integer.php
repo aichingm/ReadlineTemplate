@@ -3,12 +3,10 @@
 require __DIR__ . '/../src/Autoload.php';
 
 $template = <<<EOF
-<Settings>
+<Template>
     <Integer key="coolNumber" prompt="What is a cool number? "/>
     <Integer key="coolNumberbetween" prompt="What is a cool number between 5 and 10? " min="5" max="10"/>
-
-</Settings> 
-        
+</Template> 
 EOF;
 
 $rt = new \ReadlineTemplate\ReadlineTemplate($template);
@@ -19,8 +17,8 @@ if (!$rt->isValidTemplate()) {
     exit();
 }
 
-$data = $rt->run();
-foreach ($data["configuration"] as $key => $value) {
+list($data, $extra)  = $rt->run();
+foreach ($data as $key => $value) {
     if (is_array($value)) {
         echo "$key:  " . var_export($value, true) . PHP_EOL;
     } elseif (is_bool($value)) {

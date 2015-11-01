@@ -3,13 +3,13 @@
 require __DIR__ . '/../src/Autoload.php';
 
 $template = <<<EOF
-<Settings>
+<Template>
     <Text key="textA" prompt="Enter some text: "/>
     <Text key="textB" prompt="Enter an empty text: " default="This is so cool"/>
         
     <Integer key="integerA" prompt="Enter a cool integer: "/>
     <Integer key="integerB" prompt="Do not enter a cool integer: " default="1337"/>
-</Settings>       
+</Template>       
 EOF;
 
 $rt = new \ReadlineTemplate\ReadlineTemplate($template);
@@ -20,8 +20,8 @@ if (!$rt->isValidTemplate()) {
     exit();
 }
 
-$data = $rt->run();
-foreach ($data["configuration"] as $key => $value) {
+list($data, $extra)  = $rt->run();
+foreach ($data as $key => $value) {
     if (is_array($value)) {
         echo "$key:  " . var_export($value, true) . PHP_EOL;
     } elseif (is_bool($value)) {
