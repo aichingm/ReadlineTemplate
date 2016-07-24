@@ -197,7 +197,7 @@ _Data_
 
 __Note:__ The value of `cool` will be set to true for `Y`, `y` and `[empty]` but just `N` and `n` will result in false
 
-Using a integer element
+Using an integer element
 ------------------------
 Use this element to read signed integers.
 _Template Code_
@@ -272,12 +272,37 @@ _Attributes_
 
 _Input_
 
-    What is a cool name? Mario
+
 
 _Data_
 
     coolName: Mario
 
+Using a regex element
+------------------------
+Use this element to read text values with a certain pattern.
+
+_Template Code_
+
+    <Template>
+        <Regex key="fancyString" prompt="What is your locale? " pattern="[A-Z]{2}_[a-z]{2}"/>
+        <Regex key="superFancyString" prompt="Come on what is your locale? " pattern="~^[A-Z]{2}_[a-z]{2}$~" raw="true"/>
+    </Template>  
+
+_Attributes_
+
+1. `pattern` The `pattern` attribute specifies the regular expressions pattern.
+1. `raw` The `raw` attribute used with the value `true` specifies that you add the delimiters, the begin symbol and the end symbol your self. If not used your pattern will be encapsulated by `~^` and `$~`. This is useful if you want to add your own regular expression flags.
+
+_Input_
+
+    What is your locale? DE_at
+    Come on what is your locale? EN_us
+
+_Data_
+
+    fancyString:  DE_at
+    superFancyString:  EN_us
 
 Using a filename element
 ------------------------
@@ -523,18 +548,18 @@ _Data_
 Exclude
 =======
 
-The data which will be returned from the `run` method is contained in an array with two sections **data** and **extra**. To exclude a key-value-pair from the data section and move it to the extra section use the `exclude` attribute with the `from-data` value. 
+The data which will be returned from the `run` method is contained in an array with two sections **data** and **extra**. To exclude a key-value-pair from the **data** section and move it to the **extra** section use the `exclude` attribute with the `from-data` value. 
 
 _Example_
 
     <Template>
-        <Boolean key="canIAsk" prompt="Can I ask you some thing? " exclude="from-data"/>
-        <Text key="name" prompt="What's your name? " depends="canIAsk" depends-equals="true"/>
-    </Template> 
+        <Text key="password" prompt="I swear this will not end up in the collected data! What is your password? " exclude="from-data"/>
+        <Text key="name" prompt="What's your name? (This will end up in data) " />
+    </Template>
 
 _Input_
 
-    I sware this will not end up in the collected data! What is your password? password1
+    I swear this will not end up in the collected data! What is your password? password1
     What's your name? (This will end up in data) Mario
 
 _Data & Extra_

@@ -118,6 +118,7 @@ class ReadlineTemplate {
         $this->addReader(new reader\MultiListChoice());
         $this->addReader(new reader\Number());
         $this->addReader(new reader\Text());
+        $this->addReader(new reader\Regex());
         $this->addReader(new reader\Hidden());
         $this->addReader(new reader\File());
     }

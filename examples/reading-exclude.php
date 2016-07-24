@@ -3,7 +3,7 @@ require __DIR__ . '/../src/Autoload.php';
 
 $template = <<<EOF
 <Template>
-    <Text key="password" prompt="I sware this will not end up in the collected data! What is your password? " exclude="from-data"/>
+    <Text key="password" prompt="I swear this will not end up in the collected data! What is your password? " exclude="from-data"/>
     <Text key="name" prompt="What's your name? (This will end up in data) " />
 </Template> 
 EOF;

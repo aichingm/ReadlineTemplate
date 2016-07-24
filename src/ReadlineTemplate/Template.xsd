@@ -17,6 +17,13 @@ If your Template.xml file is valid aginst this schema there should be no problem
                         <xs:attributeGroup ref="defaultGroup" />
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="Regex">
+                    <xs:complexType>
+                        <xs:attributeGroup ref="mustHaveGroup" />
+                        <xs:attributeGroup ref="dependsGroup" />
+                        <xs:attributeGroup ref="patternGroup" />
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="Number">
                     <xs:complexType>
                         <xs:attributeGroup ref="mustHaveGroup" />
@@ -104,6 +111,10 @@ If your Template.xml file is valid aginst this schema there should be no problem
     <xs:attributeGroup name="fileGroup">
         <xs:attribute name="exists" use="required" type="xs:string"/>
         <xs:attribute name="extension" use="optional" type="xs:string"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="patternGroup">
+        <xs:attribute name="pattern" use="required" type="xs:string"/>
+        <xs:attribute name="raw" use="optional" type="xs:string"/>
     </xs:attributeGroup>
     <xs:attributeGroup name="dependsGroup">
         <xs:attribute name="depends" use="optional" type="xs:string" />
