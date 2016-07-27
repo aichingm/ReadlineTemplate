@@ -285,8 +285,8 @@ Use this element to read text values with a certain pattern.
 _Template Code_
 
     <Template>
-        <Regex key="fancyString" prompt="What is your locale? " pattern="[A-Z]{2}_[a-z]{2}"/>
-        <Regex key="superFancyString" prompt="Come on what is your locale? " pattern="~^[A-Z]{2}_[a-z]{2}$~" raw="true"/>
+        <Regex key="fancyString" prompt="What is your locale? " pattern="[a-z]{2}_[A-Z]{2}"/>
+        <Regex key="superFancyString" prompt="Come on what is your locale? " pattern="~^[a-z]{2}_[A-Z]{2}$~" raw="true"/>
     </Template>  
 
 _Attributes_
@@ -296,13 +296,13 @@ _Attributes_
 
 _Input_
 
-    What is your locale? DE_at
-    Come on what is your locale? EN_us
+    What is your locale? de_AT
+    Come on what is your locale? en_US
 
 _Data_
 
-    fancyString:  DE_at
-    superFancyString:  EN_us
+    fancyString:  de_AT
+    superFancyString:  en_US
 
 Using a filename element
 ------------------------
